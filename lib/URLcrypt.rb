@@ -6,10 +6,6 @@ module URLcrypt
   # filters when URLs are used in emails
   TABLE = "1bcd2fgh3jklmn4pqrstAvwxyz567890".freeze
 
-  def self.key
-    Thread.current[:urlcrypt_key]
-  end
-
   def self.key=(key)
     Thread.current[:urlcrypt_key] = key
   end
@@ -72,6 +68,11 @@ module URLcrypt
   end
   
   private 
+
+    def self.key
+      Thread.current[:urlcrypt_key]
+    end
+
     
     def self.cipher(mode)
       cipher = OpenSSL::Cipher.new('aes-256-cbc')
