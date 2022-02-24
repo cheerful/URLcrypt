@@ -2,7 +2,7 @@ require 'openssl'
 
 module URLcrypt
   # avoid vowels to not generate four-letter words, etc.
-  # this is important because those words can trigger spam 
+  # this is important because those words can trigger spam
   # filters when URLs are used in emails
   TABLE = "1bcd2fgh3jklmn4pqrstAvwxyz567890".freeze
 
@@ -31,7 +31,7 @@ module URLcrypt
       [(0..n-1).to_a.reverse.collect {|i| TABLE[(c >> i * 5) & 0x1f].chr},
        ("=" * (8-n))] # TODO: remove '=' padding generation
     end
-    
+
   end
 
   def self.chunks(str, size)
@@ -52,28 +52,28 @@ module URLcrypt
   def self.decode(data)
     chunks(data, 8).collect(&:decode).flatten.join
   end
-  
+
   def self.decrypt(data)
     iv, encrypted = data.split('Z').map{|part| decode(part)}
     fail DecryptError, "not a valid string to decrypt" unless iv && encrypted
     decrypter = cipher(:decrypt)
     decrypter.iv = iv
-    decrypter.update(encrypted) + decrypter.final 
+    decrypter.update(encrypted) + decrypter.final
   end
-    
+
   def self.encrypt(data)
     crypter = cipher(:encrypt)
     crypter.iv = iv = crypter.random_iv
     "#{encode(iv)}Z#{encode(crypter.update(data) + crypter.final)}"
   end
-  
-  private 
+
+  private
 
     def self.key
       Thread.current[:urlcrypt_key]
     end
 
-    
+
     def self.cipher(mode)
       cipher = OpenSSL::Cipher.new('aes-256-cbc')
       cipher.send(mode)
