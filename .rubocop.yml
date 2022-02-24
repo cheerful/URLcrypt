@@ -1,0 +1,21 @@
+require:
+  - rubocop-thread_safety
+
+AllCops:
+  NewCops: enable
+
+ThreadSafety:
+  Enabled: true
+  Exclude:
+    - 'test/**/*'
+
+Naming:
+  Enabled: false
+Style:
+  Enabled: false
+Layout:
+  Enabled: false
+Metrics:
+  Enabled: false
+Lint:
+  Enabled: false
