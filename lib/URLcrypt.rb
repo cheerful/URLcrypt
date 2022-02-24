@@ -6,10 +6,6 @@ module URLcrypt
   # filters when URLs are used in emails
   TABLE = "1bcd2fgh3jklmn4pqrstAvwxyz567890".freeze
 
-  def self.key=(key)
-    Thread.current[:urlcrypt_key] = key
-  end
-
   class Chunk
     def initialize(bytes)
       @bytes = bytes
@@ -53,28 +49,22 @@ module URLcrypt
     chunks(data, 8).collect(&:decode).flatten.join
   end
 
-  def self.decrypt(data)
+  def self.decrypt(data, key: ENV.fetch('urlcrypt_key'))
     iv, encrypted = data.split('Z').map{|part| decode(part)}
     fail DecryptError, "not a valid string to decrypt" unless iv && encrypted
-    decrypter = cipher(:decrypt)
+    decrypter = cipher(:decrypt, key: key)
     decrypter.iv = iv
     decrypter.update(encrypted) + decrypter.final
   end
 
-  def self.encrypt(data)
-    crypter = cipher(:encrypt)
+  def self.encrypt(data, key: ENV.fetch('urlcrypt_key'))
+    crypter = cipher(:encrypt, key: key)
     crypter.iv = iv = crypter.random_iv
     "#{encode(iv)}Z#{encode(crypter.update(data) + crypter.final)}"
   end
 
   private
-
-    def self.key
-      Thread.current[:urlcrypt_key]
-    end
-
-
-    def self.cipher(mode)
+    def self.cipher(mode, key:)
       cipher = OpenSSL::Cipher.new('aes-256-cbc')
       cipher.send(mode)
       cipher.key = key.byteslice(0,cipher.key_len)
