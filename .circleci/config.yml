@@ -15,6 +15,9 @@ jobs:
       - run:
           name: Run tests
           command: bundle exec rake test:all
+      - run:
+          name: Rubocop
+          command: bundle exec rubocop
 references:
   matrix_build: &matrix_build
     build:
