@@ -2,6 +2,12 @@ GEM
   remote: https://rubygems.org/
   specs:
     ast (2.4.2)
+    debug (1.4.0)
+      irb (>= 1.3.6)
+      reline (>= 0.2.7)
+    io-console (0.5.11)
+    irb (1.4.1)
+      reline (>= 0.3.0)
     minitest (5.15.0)
     multi_json (1.7.1)
     parallel (1.21.0)
@@ -10,6 +16,8 @@ GEM
     rainbow (3.1.1)
     rake (10.0.3)
     regexp_parser (2.2.1)
+    reline (0.3.1)
+      io-console (~> 0.5)
     rexml (3.2.5)
     rubocop (1.25.1)
       parallel (~> 1.10)
@@ -35,6 +43,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  debug
   minitest
   rake
   rubocop

@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 group :test do
+  gem 'debug'
   gem 'minitest'
   gem "rake"
   gem "rubocop", require: false
