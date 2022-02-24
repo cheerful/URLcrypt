@@ -27,7 +27,11 @@ module URLcrypt
       [(0..n-1).to_a.reverse.collect {|i| TABLE[(c >> i * 5) & 0x1f].chr},
        ("=" * (8-n))] # TODO: remove '=' padding generation
     end
+  end
 
+  def self.key=(key)
+    warn "`URLcrypt.key=` is deprecated. See the README on using environment variables with URLcrypt."
+    ENV['urlcrypt_key'] = [key].pack('H*')
   end
 
   def self.chunks(str, size)

@@ -23,4 +23,9 @@ class TestURLcrypt < TestClass
       assert_decoding(encoded, original)
     end
   end
+
+  def test_key_deprecation
+    URLcrypt.key = 'aaaa'
+    assert_equal "\xAA\xAA", ENV.fetch('urlcrypt_key')
+  end
 end

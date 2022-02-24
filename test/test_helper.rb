@@ -15,7 +15,7 @@ class TestClass < Minitest::Test
     bytes2 = string2.bytes.to_a.join(':')
     assert_equal(bytes1, bytes2)
   end
-  
+
   def assert_decoding(encoded, plain)
     decoded = URLcrypt.decode(encoded)
     assert_bytes_equal(plain, decoded)
