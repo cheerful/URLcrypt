@@ -23,23 +23,9 @@ class TestURLcrypt < TestClass
       assert_decoding(encoded, original)
     end
   end
-  
-  def test_encryption
-    # pack() converts this secret into a byte array
-    secret = ['d25883a27b9a639da85ea7e159b661218799c9efa63069fac13a6778c954fb6d'].pack('H*')
-    URLcrypt::key = secret
 
-    assert_equal  OpenSSL::Cipher.new('aes-256-cbc').key_len, secret.bytesize
-
-    original  = "hello world!"
-    encrypted = URLcrypt::encrypt(original)
-    assert_equal(URLcrypt::decrypt(encrypted), original)
-  end
-
-  def test_decrypt_error
-    error = assert_raises(URLcrypt::DecryptError) do
-      ::URLcrypt::decrypt("just some plaintext")
-    end
-    assert_equal error.message, "not a valid string to decrypt"
+  def test_key_deprecation
+    URLcrypt.key = 'aaaa'
+    assert_equal "\xAA\xAA", ENV.fetch('urlcrypt_key')
   end
 end

@@ -20,7 +20,7 @@ that doesn't have other authentication or persistence mechanisms (like cookies):
   * Links that come with an expiration date (à la S3)
   * Mini-apps that don't persist data on the server
 
-Works with Ruby 2.1+
+Works with Ruby 2.6+
 
 **Important**: As a general guideline, URL lengths shouldn't exceed about 2000
 characters in length, as URLs longer than that will not work in some browsers
@@ -41,17 +41,20 @@ Add to your Gemfile:
 gem 'urlcrypt', '~> 0.1.1', require: 'URLcrypt'
 ```
 
+Then, set `ENV['urlcrypt_key']` to the default encryption key you will be using. This should be at least a 256-bit AES key, see below. **To ensure your strings are encoded, URLcrypt uses `ENV.fetch` to check for the variable, so it _must_ be set.**
+
 ## Example
 
 ```ruby
-# encrypt and encode with 256-bit AES
-# one-time setup, set this to a securely random key with at least 256 bits, see below
-URLcrypt.key = '...'
-
-# now encrypt and decrypt!
+# encrypt and decrypt using the default key from ENV['urlcrypt_key']!
 URLcrypt.encrypt('chunky bacon!')        # => "sgmt40kbmnh1663nvwknxk5l0mZ6Av2ndhgw80rkypnp17xmmg5hy"
 URLcrypt.decrypt('sgmt40kbmnh1663nvwknxk5l0mZ6Av2ndhgw80rkypnp17xmmg5hy')
   # => "chunky bacon!"
+
+# If needed, you can specify a custom key per-call
+URLcrypt.encrypt('chunky bacon!', key: '...')        # => "....."
+URLcrypt.decrypt('sgmt40kbmnh1663nvwknxk5l0mZ6Av2ndhgw80rkypnp17xmmg5hy', key: '...')
+# => "chunky bacon!"
 
 # encoding without encryption (don't use for anything sensitive!), doesn't need key set
 URLcrypt.encode('chunky bacon!')          # => "mnAhk6tlp2qg2yldn8xcc"
@@ -70,7 +73,7 @@ ba7f56f8f9873b1653d7f032cc474938fd749ee8fbbf731a7c41d698826aca3cebfffa832be7e6bc
 To use the key with URLcrypt, you'll need to convert that from a hex string into a real byte array:
 
 ```ruby
-URLcrypt::key = ['longhexkeygoeshere'].pack('H*')
+ENV['urlcrypt_key'] = ['longhexkeygoeshere'].pack('H*')
 ```
 
 ## Running the Test Suite

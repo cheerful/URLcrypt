@@ -2,13 +2,9 @@ require 'openssl'
 
 module URLcrypt
   # avoid vowels to not generate four-letter words, etc.
-  # this is important because those words can trigger spam 
+  # this is important because those words can trigger spam
   # filters when URLs are used in emails
   TABLE = "1bcd2fgh3jklmn4pqrstAvwxyz567890".freeze
-
-  def self.key=(key)
-    @key = key
-  end
 
   class Chunk
     def initialize(bytes)
@@ -31,7 +27,11 @@ module URLcrypt
       [(0..n-1).to_a.reverse.collect {|i| TABLE[(c >> i * 5) & 0x1f].chr},
        ("=" * (8-n))] # TODO: remove '=' padding generation
     end
-    
+  end
+
+  def self.key=(key)
+    warn "`URLcrypt.key=` is deprecated. See the README on using environment variables with URLcrypt."
+    ENV['urlcrypt_key'] = [key].pack('H*')
   end
 
   def self.chunks(str, size)
@@ -52,27 +52,26 @@ module URLcrypt
   def self.decode(data)
     chunks(data, 8).collect(&:decode).flatten.join
   end
-  
-  def self.decrypt(data)
+
+  def self.decrypt(data, key: ENV.fetch('urlcrypt_key'))
     iv, encrypted = data.split('Z').map{|part| decode(part)}
     fail DecryptError, "not a valid string to decrypt" unless iv && encrypted
-    decrypter = cipher(:decrypt)
+    decrypter = cipher(:decrypt, key: key)
     decrypter.iv = iv
-    decrypter.update(encrypted) + decrypter.final 
+    decrypter.update(encrypted) + decrypter.final
   end
-    
-  def self.encrypt(data)
-    crypter = cipher(:encrypt)
+
+  def self.encrypt(data, key: ENV.fetch('urlcrypt_key'))
+    crypter = cipher(:encrypt, key: key)
     crypter.iv = iv = crypter.random_iv
     "#{encode(iv)}Z#{encode(crypter.update(data) + crypter.final)}"
   end
-  
-  private 
-    
-    def self.cipher(mode)
+
+  private
+    def self.cipher(mode, key:)
       cipher = OpenSSL::Cipher.new('aes-256-cbc')
       cipher.send(mode)
-      cipher.key = @key.byteslice(0,cipher.key_len)
+      cipher.key = key.byteslice(0,cipher.key_len)
       cipher
     end
 

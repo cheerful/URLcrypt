@@ -1,4 +1,4 @@
-# Copyright (c) 2013 Thomas Fuchs
+# Copyright (c) 2013-2022 Thomas Fuchs
 # Copyright (c) 2007-2011 Samuel Tesla
 
 # Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -33,12 +33,11 @@ gemspec = Gem::Specification.new do |s|
   s.email = "thomas@slash7.com"
   s.extra_rdoc_files = ["README.md"]
   s.files = FileList["Rakefile", "{config,lib,test}/**/*"]
-  s.has_rdoc = true
   s.name = 'urlcrypt'
   s.require_paths << 'lib'
   s.requirements << 'none'
   s.summary = "Securely encode and decode short pieces of arbitrary binary data in URLs."
-  s.version = "0.1.2"
+  s.version = "0.2.0"
 end
 
 Gem::PackageTask.new(gemspec) do |pkg|
