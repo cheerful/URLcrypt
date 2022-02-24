@@ -2,12 +2,12 @@
 require 'bundler'
 Bundler.require(:default, :test)
 
-require 'coveralls'
-Coveralls.wear!
+require 'simplecov'
+SimpleCov.start
 
-require 'test/unit'
+require "minitest/autorun"
 
-class TestClass < Test::Unit::TestCase
+class TestClass < Minitest::Test
   require 'URLcrypt'
 
   def assert_bytes_equal(string1, string2)
