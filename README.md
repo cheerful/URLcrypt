@@ -37,7 +37,7 @@ Patches are welcome; please include tests!
 
 Add to your Gemfile:
 ```ruby
-gem 'urlcrypt', '~> 0.1.1', require: 'URLcrypt'
+gem 'urlcrypt', '~> 1.0.0', require: 'URLcrypt'
 ```
 
 Then, set `ENV['urlcrypt_key']` to the default encryption key you will be using. This should be at least a 256-bit AES key, see below. **To ensure your strings are encoded, URLcrypt uses `ENV.fetch` to check for the variable, so it _must_ be set.**
