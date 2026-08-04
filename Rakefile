@@ -22,27 +22,10 @@
 require File.join(File.dirname(__FILE__), 'config', 'environment.rb')
 require 'rake/clean'
 require 'rake/testtask'
-require 'rubygems'
-require 'rubygems/package_task'
 require 'bundler'
+require "bundler/gem_tasks"
 
 task :default => ['test:all']
-
-gemspec = Gem::Specification.new do |s|
-  s.author = "Thomas Fuchs"
-  s.email = "thomas@slash7.com"
-  s.extra_rdoc_files = ["README.md"]
-  s.files = FileList["Rakefile", "{config,lib,test}/**/*"]
-  s.name = 'urlcrypt'
-  s.require_paths << 'lib'
-  s.requirements << 'none'
-  s.summary = "Securely encode and decode short pieces of arbitrary binary data in URLs."
-  s.version = "1.0.0"
-end
-
-Gem::PackageTask.new(gemspec) do |pkg|
-  pkg.need_tar = true
-end
 
 namespace :test do
   Rake::TestTask.new :all do |t|
