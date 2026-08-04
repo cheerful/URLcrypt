@@ -3,6 +3,7 @@ require:
 
 AllCops:
   NewCops: enable
+  TargetRubyVersion: 2.6
 
 ThreadSafety:
   Enabled: true
