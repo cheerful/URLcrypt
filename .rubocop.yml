@@ -4,6 +4,7 @@ plugins:
 AllCops:
   NewCops: enable
   TargetRubyVersion: 3.2
+  SuggestExtensions: false
 
 ThreadSafety:
   Enabled: true
