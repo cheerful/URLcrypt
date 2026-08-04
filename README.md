@@ -1,7 +1,6 @@
 # URLcrypt
 
-[![Build Status](https://travis-ci.org/cheerful/URLcrypt.png?branch=master)](https://travis-ci.org/cheerful/URLcrypt)
-[![Coverage Status](https://coveralls.io/repos/cheerful/URLcrypt/badge.png?branch=master)](https://coveralls.io/r/cheerful/URLcrypt)
+[![CircleCI](https://dl.circleci.com/status-badge/img/gh/cheerful/URLcrypt/tree/master.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/cheerful/URLcrypt/tree/master)
 
 Ever wanted to securely transmit (not too long) pieces of arbitrary binary data
 in a URL? **URLcrypt** makes it easy!
