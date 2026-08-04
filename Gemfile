@@ -1,5 +1,7 @@
 source 'https://gem.coop'
 
+gemspec
+
 group :test do
   gem 'debug', platforms: :ruby
   gem 'minitest'

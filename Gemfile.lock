@@ -1,3 +1,8 @@
+PATH
+  remote: .
+  specs:
+    urlcrypt (1.0.0)
+
 GEM
   remote: https://gem.coop/
   specs:
@@ -78,6 +83,7 @@ DEPENDENCIES
   rubocop
   rubocop-thread_safety
   simplecov
+  urlcrypt!
 
 BUNDLED WITH
   4.0.6
