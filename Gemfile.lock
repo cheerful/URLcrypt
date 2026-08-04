@@ -1,5 +1,5 @@
 GEM
-  remote: https://rubygems.org/
+  remote: https://gem.coop/
   specs:
     ast (2.4.3)
     debug (1.11.1)
