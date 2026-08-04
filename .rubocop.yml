@@ -1,14 +1,16 @@
-require:
+plugins:
   - rubocop-thread_safety
 
 AllCops:
   NewCops: enable
-  TargetRubyVersion: 2.6
+  TargetRubyVersion: 3.2
+  SuggestExtensions: false
 
 ThreadSafety:
   Enabled: true
   Exclude:
     - 'test/**/*'
+    - 'pkg/**/*'
 
 Naming:
   Enabled: false

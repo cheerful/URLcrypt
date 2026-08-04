@@ -1,7 +1,6 @@
 # URLcrypt
 
-[![Build Status](https://travis-ci.org/cheerful/URLcrypt.png?branch=master)](https://travis-ci.org/cheerful/URLcrypt)
-[![Coverage Status](https://coveralls.io/repos/cheerful/URLcrypt/badge.png?branch=master)](https://coveralls.io/r/cheerful/URLcrypt)
+[![CircleCI](https://dl.circleci.com/status-badge/img/gh/cheerful/URLcrypt/tree/master.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/cheerful/URLcrypt/tree/master)
 
 Ever wanted to securely transmit (not too long) pieces of arbitrary binary data
 in a URL? **URLcrypt** makes it easy!
@@ -20,7 +19,7 @@ that doesn't have other authentication or persistence mechanisms (like cookies):
   * Links that come with an expiration date (à la S3)
   * Mini-apps that don't persist data on the server
 
-Works with Ruby 2.6+
+Works with Ruby 3.2+
 
 **Important**: As a general guideline, URL lengths shouldn't exceed about 2000
 characters in length, as URLs longer than that will not work in some browsers
@@ -38,7 +37,7 @@ Patches are welcome; please include tests!
 
 Add to your Gemfile:
 ```ruby
-gem 'urlcrypt', '~> 0.1.1', require: 'URLcrypt'
+gem 'urlcrypt', '~> 1.0.0', require: 'URLcrypt'
 ```
 
 Then, set `ENV['urlcrypt_key']` to the default encryption key you will be using. This should be at least a 256-bit AES key, see below. **To ensure your strings are encoded, URLcrypt uses `ENV.fetch` to check for the variable, so it _must_ be set.**

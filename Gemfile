@@ -1,4 +1,4 @@
-source 'https://rubygems.org'
+source 'https://gem.coop'
 
 group :test do
   gem 'debug', platforms: :ruby

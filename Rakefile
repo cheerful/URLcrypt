@@ -1,4 +1,4 @@
-# Copyright (c) 2013-2022 Thomas Fuchs
+# Copyright (c) 2013-2026 Thomas Fuchs
 # Copyright (c) 2007-2011 Samuel Tesla
 
 # Permission is hereby granted, free of charge, to any person obtaining a copy

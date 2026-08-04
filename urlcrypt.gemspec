@@ -1,6 +1,6 @@
 Gem::Specification.new do |spec|
   spec.name          = 'urlcrypt'
-  spec.version       = "0.2.0"
+  spec.version       = "1.0.0"
   spec.authors       = ["Thomas Fuchs"]
   spec.email         = ["thomas@slash7.com"]
   spec.extra_rdoc_files = ["README.md"]
@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.description = "Securely encode and decode short pieces of arbitrary binary data in URLs."
   spec.homepage      = "https://github.com/cheerful/URLcrypt"
   spec.license       = "MIT"
-  spec.required_ruby_version = Gem::Requirement.new(">= 2.6.0")
+  spec.required_ruby_version = Gem::Requirement.new(">= 3.2.0")
 
   spec.metadata["homepage_uri"] = spec.homepage
   spec.metadata["source_code_uri"] = "https://github.com/cheerful/URLcrypt"

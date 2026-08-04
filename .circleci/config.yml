@@ -1,12 +1,11 @@
 version: 2.1
+
 jobs:
   build:
     parameters:
       ruby_version:
         type: string
-        # https://circleci.com/docs/2.0/docker-image-tags.json
     docker:
-      # https://circleci.com/developer/images/image/cimg/ruby
       - image: << parameters.ruby_version >>
     steps:
       - checkout
@@ -18,21 +17,21 @@ jobs:
       - run:
           name: Rubocop
           command: bundle exec rubocop
+
 references:
   matrix_build: &matrix_build
     build:
       matrix:
-        # https://circleci.com/docs/2.0/reusing-config/
+        tags: true
         parameters:
-          ruby_version: [
-            "circleci/jruby",
-            "cimg/ruby:2.6",
-            "cimg/ruby:2.7",
-            "cimg/ruby:3.0",
-            "cimg/ruby:3.1"
-          ]
+          ruby_version:
+            - "cimg/ruby:3.2"
+            - "cimg/ruby:3.3"
+            - "cimg/ruby:3.4"
+            - "cimg/ruby:4.0"
+
 workflows:
-   version: 2
-   commit:
-     jobs:
-       - <<: *matrix_build
+  version: 2
+  commit:
+    jobs:
+      - <<: *matrix_build
