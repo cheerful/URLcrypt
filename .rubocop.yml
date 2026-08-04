@@ -1,4 +1,4 @@
-require:
+plugins:
   - rubocop-thread_safety
 
 AllCops:
@@ -8,6 +8,7 @@ ThreadSafety:
   Enabled: true
   Exclude:
     - 'test/**/*'
+    - 'pkg/**/*'
 
 Naming:
   Enabled: false
